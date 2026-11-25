@@ -1,0 +1,12 @@
+imagem: broker:latest
+pullPolicy: Never
+hostSmtp: broker.local
+portaSmtp: 587
+operadorUsuario: operador
+smtpCertificado: ""
+segredo:
+  banco: "Host=postgres-rw;Port=5432;Username=broker;Password=broker-dev;Database=broker;SSL Mode=Disable"
+  cache: "valkey:6379,password=valkey-dev,abortConnect=false"
+  operadorSenha: operador-dev
+  webhook: ""
+  smtpSenha: ""

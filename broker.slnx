@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/broker.Api/broker.Api.csproj" />
+    <Project Path="src/broker.Application/broker.Application.csproj" />
+    <Project Path="src/broker.Domain/broker.Domain.csproj" />
+    <Project Path="src/broker.Infrastructure/broker.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/broker.Tests/broker.Tests.csproj" />
+  </Folder>
+</Solution>

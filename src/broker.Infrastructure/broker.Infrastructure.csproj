@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<ItemGroup>
+		<PackageReference Include="Dapper" />
+		<PackageReference Include="StackExchange.Redis" />
+		<PackageReference Include="Microsoft.AspNetCore.DataProtection" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+		<PackageReference Include="Microsoft.Extensions.Http" />
+		<PackageReference Include="Temporalio" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\broker.Application\broker.Application.csproj" />
+	</ItemGroup>
+
+</Project>

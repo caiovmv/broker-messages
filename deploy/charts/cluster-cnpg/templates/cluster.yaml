@@ -1,0 +1,21 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres
+spec:
+  instances: 1
+  imageName: {{ .Values.imagem | quote }}
+  storage:
+    size: {{ .Values.armazenamento | quote }}
+  bootstrap:
+    initdb:
+      database: broker
+      owner: broker
+      secret:
+        name: postgres-broker
+      postInitSQL:
+        - CREATE ROLE temporal WITH LOGIN PASSWORD '{{ .Values.senhaTemporal }}'
+        - CREATE DATABASE temporal OWNER temporal
+        - CREATE DATABASE temporal_visibility OWNER temporal
+  monitoring:
+    enablePodMonitor: false

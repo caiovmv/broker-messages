@@ -1,0 +1,52 @@
+# Stack do broker. Contexto: Kubernetes do Docker Desktop.
+# Uma replica, storageClass padrao do cluster, sem ingress.
+helmDefaults:
+  wait: true
+  timeout: 900
+  createNamespace: true
+
+repositories:
+  - name: cnpg
+    url: https://cloudnative-pg.github.io/charts
+  - name: valkey
+    url: https://valkey.io/valkey-helm/
+  - name: temporal
+    url: https://go.temporal.io/helm-charts
+
+releases:
+  - name: cnpg
+    namespace: cnpg-system
+    chart: cnpg/cloudnative-pg
+    version: 0.29.1
+    values:
+      - values/cnpg.yaml
+
+  - name: valkey
+    namespace: broker
+    chart: valkey/valkey
+    version: 0.12.1
+    values:
+      - values/valkey.yaml
+
+  - name: postgres
+    namespace: broker
+    chart: ./charts/cluster-cnpg
+    needs:
+      - cnpg-system/cnpg
+
+  - name: temporal
+    namespace: broker
+    chart: temporal/temporal
+    version: 1.7.0
+    values:
+      - values/temporal.yaml
+    needs:
+      - broker/postgres
+
+  - name: broker
+    namespace: broker
+    chart: ./charts/broker
+    needs:
+      - broker/postgres
+      - broker/valkey
+      - broker/temporal
